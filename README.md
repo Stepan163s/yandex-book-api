@@ -5,6 +5,16 @@
 
 **Yandex Book API** — профессиональная Pydantic-обёртка для Bookmate API. Предоставляет модели для основных сущностей, методы для получения данных и скачивания медиа.
 
+## Содержание
+
+- [Установка](#установка)
+- [Быстрый старт](#быстрый-старт)
+- [Примеры использования](#примеры-использования)
+- [Архитектура библиотеки](#архитектура-библиотеки)
+- [Список моделей](#список-моделей)
+- [Обработка ошибок](#обработка-ошибок)
+- [Лицензия](#лицензия)
+
 ## Установка
 
 ```bash
@@ -28,6 +38,37 @@ for b in books[:3]:
 book = Book.get("mqK3FFjg")
 print(book.title, book.annotation)
 book.download_cover(size="small", dest="mqK3FFjg_thumb.jpg")
+```
+
+---
+
+## Примеры использования
+
+### Базовые примеры
+
+- **[Работа с пользователем](examples/user_basic.py)** — получение информации о пользователе
+- **[Книги пользователя](examples/user_books.py)** — список книг в библиотеке
+- **[Аудиокниги](examples/user_audiobooks.py)** — список аудиокниг
+- **[Цитаты](examples/user_quotes.py)** — цитаты пользователя
+- **[Детали книги](examples/book_details.py)** — подробная информация о книге
+
+### Продвинутые примеры
+
+- **[Скачивание медиа](examples/download_media.py)** — обложки и аватары
+- **[Обработка ошибок](examples/error_handling.py)** — правильная обработка ошибок API
+
+### Запуск примеров
+
+```bash
+# Клонируйте репозиторий
+git clone https://github.com/Stepan163s/yandex-book-api.git
+cd yandex-book-api
+
+# Установите зависимости
+pip install -e .
+
+# Запустите пример
+python examples/user_basic.py
 ```
 
 ---
@@ -105,18 +146,16 @@ book.download_cover(size="small", dest="mqK3FFjg_thumb.jpg")
 | `social_networks`      | `List[Any]?` | Дополнительные сети           |
 
 **Методы**:
-```
-User.get(user_id) -> User
-User.list_books(user_id) -> List[Book]
-User.list_audiobooks(user_id) -> List[Audiobook]
-User.list_comics(user_id) -> List[Comicbook]
-User.list_bookshelves(user_id) -> List[Bookshelf]
-User.list_followings(user_id) -> List[User]
-User.list_impressions(user_id) -> List[Impression]
-User.list_quotes(user_id) -> List[Quote]
-User.list_reading_achievements(user_id) -> List[ReadingAchievement]
-user.download_avatar(size, dest) -> str
-```
+- [`User.get(user_id)`](examples/user_basic.py) → `User` — получить пользователя
+- [`User.list_books(user_id)`](examples/user_books.py) → `List[Book]` — список книг
+- [`User.list_audiobooks(user_id)`](examples/user_audiobooks.py) → `List[Audiobook]` — список аудиокниг
+- [`User.list_comics(user_id)`](examples/user_basic.py) → `List[Comicbook]` — список комиксов
+- [`User.list_bookshelves(user_id)`](examples/user_basic.py) → `List[Bookshelf]` — список полок
+- [`User.list_followings(user_id)`](examples/user_basic.py) → `List[User]` — подписки
+- [`User.list_impressions(user_id)`](examples/user_basic.py) → `List[Impression]` — впечатления
+- [`User.list_quotes(user_id)`](examples/user_quotes.py) → `List[Quote]` — цитаты
+- [`User.list_reading_achievements(user_id)`](examples/user_basic.py) → `List[ReadingAchievement]` — достижения
+- [`user.download_avatar(size, dest)`](examples/download_media.py) → `str` — скачать аватар
 
 ### Book
 
@@ -132,11 +171,9 @@ user.download_avatar(size, dest) -> str
 | `authors_objects`| `List[Person]?` | Авторы              |
 
 **Методы**:
-```
-Book.get(book_id) -> Book
-Book.impressions(book_id) -> List[Impression]
-book.download_cover(size, dest) -> str
-```
+- [`Book.get(book_id)`](examples/book_details.py) → `Book` — получить книгу
+- [`Book.impressions(book_id)`](examples/book_details.py) → `List[Impression]` — впечатления
+- [`book.download_cover(size, dest)`](examples/download_media.py) → `str` — скачать обложку
 
 ### Audiobook
 
@@ -168,11 +205,9 @@ book.download_cover(size, dest) -> str
 - `comic_card: Any?` — Дополнительные данные
 
 **Методы**:
-```
-Comicbook.get(comic_id) -> Comicbook
-Comicbook.impressions(comic_id) -> List[Impression]
-comic.download_cover(size, dest) -> str
-```
+- [`Comicbook.get(comic_id)`](examples/book_details.py) → `Comicbook` — получить комикс
+- [`Comicbook.impressions(comic_id)`](examples/book_details.py) → `List[Impression]` — впечатления
+- [`comic.download_cover(size, dest)`](examples/download_media.py) → `str` — скачать обложку
 
 ### Bookshelf
 
@@ -207,11 +242,9 @@ comic.download_cover(size, dest) -> str
 | `liker_users`    | `List[User]?`   | Пользователи, лайкнувшие    |
 
 **Методы**:
-```
-User.list_impressions(user_id) -> List[Impression]
-Book.impressions(book_id) -> List[Impression]
-Comicbook.impressions(comic_id) -> List[Impression]
-```
+- [`User.list_impressions(user_id)`](examples/user_basic.py) → `List[Impression]` — впечатления пользователя
+- [`Book.impressions(book_id)`](examples/book_details.py) → `List[Impression]` — впечатления о книге
+- [`Comicbook.impressions(comic_id)`](examples/book_details.py) → `List[Impression]` — впечатления о комиксе
 
 ### Quote
 
@@ -234,9 +267,7 @@ Comicbook.impressions(comic_id) -> List[Impression]
 | `cover`             | `Image?` | Обложка книги                   |
 
 **Методы**:
-```
-User.list_quotes(user_id) -> List[Quote]
-```
+- [`User.list_quotes(user_id)`](examples/user_quotes.py) → `List[Quote]` — цитаты пользователя
 
 ### ReadingAchievement
 
@@ -260,6 +291,51 @@ User.list_quotes(user_id) -> List[Quote]
 | `promised_books_count`| `int` | Цель — книг за год                 |
 | `image_url`           | `str` | Картинка для шаринга               |
 | `share_url`           | `str` | Ссылка на шаринг челленджа         |
+
+---
+
+## Обработка ошибок
+
+### Основные типы ошибок
+
+1. **HTTP ошибки** — проблемы с API
+2. **Сетевые ошибки** — проблемы с подключением
+3. **Ошибки валидации** — неверные данные
+
+### Примеры обработки
+
+```python
+from yandex_book import User
+import requests
+
+try:
+    user = User.get("nonexistent_user")
+except requests.HTTPError as e:
+    if e.response.status_code == 404:
+        print("Пользователь не найден")
+    else:
+        print(f"Ошибка API: {e.response.status_code}")
+except requests.ConnectionError:
+    print("Ошибка подключения к серверу")
+except Exception as e:
+    print(f"Неожиданная ошибка: {e}")
+```
+
+### Безопасная работа с данными
+
+```python
+user = User.get("b1234567890")
+
+# Безопасный доступ к полям
+name = user.name or "Не указано"
+followers = user.followers_count or 0
+
+# Проверка наличия аватара
+if user.avatar and user.avatar.large:
+    print(f"Аватар: {user.avatar.large}")
+```
+
+**Подробные примеры**: [examples/error_handling.py](examples/error_handling.py)
 
 ---
 
