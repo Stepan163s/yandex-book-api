@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="yandex-book-api",
-    version="0.1.1",
+    version="0.1.2",
     description="Pydantic wrapper for Bookmate API",
     long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
