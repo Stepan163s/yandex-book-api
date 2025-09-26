@@ -70,11 +70,11 @@ class YandexBooksModel(BaseModel):
 # —————————————————————————————————————–
 
 class Image(YandexBooksModel):
-    small: Optional[str]
-    large: Optional[str]
-    placeholder: Optional[str]
-    ratio: Optional[float]
-    background_color_hex: Optional[str]
+    small: Optional[str] = None
+    large: Optional[str] = None
+    placeholder: Optional[str] = None
+    ratio: Optional[float] = None
+    background_color_hex: Optional[str] = None
 
 
 class Avatar(Image):
@@ -89,12 +89,12 @@ class Label(YandexBooksModel):
 
 class Person(YandexBooksModel):
     name: str
-    locale: str
-    uuid: str
-    works_count: Optional[int]
-    image: Optional[Image]
-    removed: Optional[bool]
-    id: Optional[int]
+    locale: Optional[str] = None
+    uuid: Optional[str] = None
+    works_count: Optional[int] = None
+    image: Optional[Image] = None
+    removed: Optional[bool] = None
+    id: Optional[int] = None
 
 
 # —————————————————————————————————————–
@@ -104,22 +104,22 @@ class Person(YandexBooksModel):
 class User(Person):
     id: int
     login: str
-    name: Optional[str]
-    avatar: Optional[Avatar]
-    bookshelves_count: Optional[int]
-    cards_count: Optional[int]
-    followers_count: Optional[int]
-    followings_count: Optional[int]
-    following: Optional[bool]
-    gender: Optional[str]
-    library_cards_count: Optional[int]
-    background_color_hex: Optional[str]
-    about: Optional[str]
-    facebook: Optional[str]
-    twitter: Optional[str]
-    vk: Optional[str]
-    site: Optional[str]
-    social_networks: Optional[List[Any]]
+    name: Optional[str] = None
+    avatar: Optional[Avatar] = None
+    bookshelves_count: Optional[int] = None
+    cards_count: Optional[int] = None
+    followers_count: Optional[int] = None
+    followings_count: Optional[int] = None
+    following: Optional[bool] = None
+    gender: Optional[str] = None
+    library_cards_count: Optional[int] = None
+    background_color_hex: Optional[str] = None
+    about: Optional[str] = None
+    facebook: Optional[str] = None
+    twitter: Optional[str] = None
+    vk: Optional[str] = None
+    site: Optional[str] = None
+    social_networks: Optional[List[Any]] = None
 
     @root_validator(pre=True)
     def _warn_extra_fields(cls, values: Dict[str, Any]) -> Dict[str, Any]:
@@ -178,11 +178,11 @@ class User(Person):
 
 class Book(YandexBooksModel):
     uuid: str
-    title: Optional[str]
-    annotation: Optional[str]
-    resource_type: Optional[str]
-    cover: Optional[Image]
-    authors_objects: Optional[List[Person]]
+    title: Optional[str] = None
+    annotation: Optional[str] = None
+    resource_type: Optional[str] = None
+    cover: Optional[Image] = None
+    authors_objects: Optional[List[Person]] = None
 
     @classmethod
     def get(cls, book_id: str) -> Book:
@@ -199,21 +199,22 @@ class Book(YandexBooksModel):
 
 
 class Audiobook(Book):
-    document_uuid: Optional[str]
-    background_color_hex: Optional[str]
-    bookshelves_count: Optional[int]
-    can_be_listened: Optional[bool]
-    duration: Optional[int]
-    impressions_count: Optional[int]
-    labels: Optional[List[Label]]
-    language: Optional[str]
-    listeners_count: Optional[int]
-    publication_date: Optional[int]
-    age_restriction: Optional[str]
-    owner_catalog_title: Optional[str]
-    editor_annotation: Optional[str]
-    subscription_level: Optional[str]
-    narrators: Optional[List[Person]]
+    document_uuid: Optional[str] = None
+    background_color_hex: Optional[str] = None
+    bookshelves_count: Optional[int] = None
+    can_be_listened: Optional[bool] = None
+    duration: Optional[int] = None
+    impressions_count: Optional[int] = None
+    labels: Optional[List[Label]] = None
+    language: Optional[str] = None
+    listeners_count: Optional[int] = None
+    publication_date: Optional[int] = None
+    age_restriction: Optional[str] = None
+    owner_catalog_title: Optional[str] = None
+    editor_annotation: Optional[str] = None
+    subscription_level: Optional[str] = None
+    narrators: Optional[List[Person]] = None
+    authors: Optional[List[Person]] = None
 
 
 class Comicbook(Audiobook):
@@ -260,7 +261,7 @@ class Impression(YandexBooksModel):
 class Quote(YandexBooksModel):
     cfi: str
     color: int
-    comment: Optional[str]
+    comment: Optional[str] = None
     comments_count: int
     content: str
     created_at: int
@@ -275,9 +276,9 @@ class Quote(YandexBooksModel):
     state: str
     style: str
     book: Book
-    authors: Optional[str]
-    authors_objects: Optional[List[Person]]
-    cover: Optional[Image]
+    authors: Optional[str] = None
+    authors_objects: Optional[List[Person]] = None
+    cover: Optional[Image] = None
 
 
 class ReadingChallenge(YandexBooksModel):
